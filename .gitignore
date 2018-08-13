@@ -6,6 +6,8 @@
 /.idea
 /.vscode
 /.vagrant
+/docker
+docker-compose.yml
 Homestead.json
 Homestead.yaml
 npm-debug.log
