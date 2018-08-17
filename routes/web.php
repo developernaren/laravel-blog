@@ -18,3 +18,8 @@ Route::get('/', function () {
 Route::get('users', 'UserController@index');
 
 Route::get('posts/create', 'PostController@create');
+
+Route::get('login', 'AuthController@login');
+Route::post('login', 'AuthController@postLogin');
+
+
