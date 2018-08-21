@@ -17,7 +17,8 @@ Route::get('/', function () {
 
 Route::get('users', 'UserController@index');
 
-Route::get('posts/create', 'PostController@create');
+Route::get('posts/create', 'PostController@create')->middleware('auth');
+Route::post('posts','PostController@store')->middleware('auth');
 
 Route::get('login', 'AuthController@login');
 Route::post('login', 'AuthController@postLogin');

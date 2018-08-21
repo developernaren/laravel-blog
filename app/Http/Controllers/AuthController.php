@@ -19,10 +19,8 @@ class AuthController extends Controller
 
         if(Auth::attempt(['email' => $email, 'password' => $password])){
             //this means the user credentials is correct
-
-            $user = Auth::user();
-
-            return 'Congrats! You are logged in as:' . $user->name;
+            //this redirects user to posts/create
+            return redirect()->intended('posts/create');
         }
 
         return redirect()->back()->with('errorMessage','The credentials are incorrect');
