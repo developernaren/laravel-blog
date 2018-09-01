@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\CreatePostForm;
 
 class PostController extends Controller
 {
@@ -11,9 +11,8 @@ class PostController extends Controller
         return view('posts.create');
     }
 
-    public function store(Request $request)
+    public function store(CreatePostForm $request)
     {
-
         //this gives us the currently logged in user
         $user = $request->user();
 
