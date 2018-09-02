@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePostForm;
+use App\Post;
+use App\User;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -26,6 +29,37 @@ class PostController extends Controller
         //meaning the id of user is automatically populated and saved in the user_id column of posts table
         $user->posts()->create($formData);
 
-        return "Post successfully saved";
+        return redirect()->route('posts.list');
     }
+
+    public function index(Request $request)
+    {
+        $posts = $request->user()->posts()->paginate(10);
+        return view('posts.list', ['posts' => $posts]);
+    }
+
+    public function show(Post $post, $slug)
+    {
+        $post = $post->withSlug($slug)->first();
+
+        return view('posts.single', ['post' => $post]);
+    }
+
+    public function edit(Post $post, $slug)
+    {
+        $post = $post->withSlug($slug)->first();
+
+        return view('posts.edit', ['post' => $post]);
+    }
+
+    public function update(CreatePostForm $request, Post $post, $slug)
+    {
+        $post = $post->withSlug($slug)->first();
+
+        $post->update($request->only('title','content'));
+
+        return redirect()->route('posts.list');
+    }
+
+
 }
