@@ -22,9 +22,6 @@ class PostController extends Controller
         //Laravel will only save the data from the key that is in the fillables array
         $formData = $request->all();
 
-        // we need a seo bot readable url, this will create a slug based on title
-        $formData['slug'] = str_slug($request->get('title'));
-
         //this creates posts based on the relation from user to post
         //meaning the id of user is automatically populated and saved in the user_id column of posts table
         $user->posts()->create($formData);
