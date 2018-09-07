@@ -56,9 +56,17 @@ class PostController extends Controller
     {
         $post = $post->withSlug($slug)->first();
 
-        $post->update($request->only('title','content'));
+        $user = $request->user();
 
-        return redirect()->route('posts.list');
+        if($user->can('update', $post)){
+            $post->update($request->only('title','content'));
+
+            return redirect()->route('posts.list');
+        }
+
+        return redirect()->route('posts.list')->with('errorMessage', 'You do not have permission to edit this post.');
+
+
     }
 
 

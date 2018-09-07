@@ -6,6 +6,11 @@
 
 @section('content')
     <div class="row">
+        @if(Session::has('errorMessage'))
+            <div class="alert alert-danger">
+                {{ Session::get('errorMessage') }}
+            </div>
+        @endif
         <h1>Post List</h1>
         <table class="table">
             <thead>
